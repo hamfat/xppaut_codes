@@ -1,0 +1,50 @@
+# the equations
+
+
+#v'=((-gl*(v-vl)-gk*n*(v-vk)-gca*minf(v)*(v-vca))*(r)^2)/c
+
+
+v'=(-gl*(v-vl)-gk*n*(v-vk)-gca*minf(v)*(v-vca))/c
+
+n'=lamdan*(ninf(v,ca)-n)
+
+ca'=(-alpha*gca*minf(v)*(v-vca)-kca*ca)*rho
+
+#parameters
+#par v1=-22.5, v2=25,v4=14.5,v5=8,v6=-15
+
+#par vl=-70,vk=-90,vca=80,alpha=7.9976e15
+
+#par ca3=400,ca4=150,phi=2.664,kca=1.3567537e2
+
+#par gk=3.1416e-13,gl=7.854e-14,gca=1.57e-13
+
+#par c=1.9635e-14,kd= 1.0e3,bt=1.0e5
+
+
+
+#initial condition
+#parameters
+par r=0.0272,r0=0.0317,v1=-0.0225
+
+par v2=0.025,v4=0.0145,v5=0.008,v6=-0.015
+
+par vl=-0.07,vk=-0.09,vca=0.08,alpha=7.9976e7
+
+par ca3=4.0e-7,ca4=1.5e-7,phi=2.664,kca=1.3567537e2
+
+par gk=3.1416e-13,gl=7.854e-14,gca=1.57e-13
+
+par c=1.9635e-14,kd= 1.0e-6,bt=1.0e-4
+        
+       
+#functions
+v3=-(v5/2)*tanh((ca-ca3)/ca4)+v6
+lamdan=phi*cosh((v-v3)/(2*v4))
+minf(v)=0.5*(1+tanh((v-v1)/v2))
+ninf(v,ca)=0.5*(1+tanh((v-v3)/v4))
+rho=(kd+ca)**2/((kd+ca)**2+kd*bt)
+
+@ maxstor=100000, dt=0.1, bound=20000
+
+done
