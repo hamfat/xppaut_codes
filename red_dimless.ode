@@ -1,0 +1,36 @@
+# the equations
+
+
+v'=-glbar*(v-vlbar)-gkbar*n*(v-vkbar)-gcabar*minf(v)*(v-vca)
+
+n'=psi*lamda(v)*(ninf(v)-n)
+
+
+#initial condition
+
+#v(0)=-0.714
+#n(0)=0.002
+
+#parameters
+par v1=-0.2813 ,v2=0.3125, vlbar=-0.875, psi=0.1665,v3=-0.1380, v4=0.1812
+par glbar=0.25, gkbar=1.0, gcabar=0.4997 
+par  vkbar=-1.125, vca=1.0
+
+
+      
+#functions
+minf(v)=0.5*(1+tanh((v-v1)/v2))
+ninf(v)=0.5*(1+tanh((v-v3)/v4))
+lamda(v)=cosh((v-v3)/2*v4)
+
+
+aux Ileak=glbar*(v-vlbar)
+aux Ik=gkbar*n*(v-vkbar)
+aux Ica=gcabar*minf(v)*(v-1)
+aux cacond=gcabar*minf(v)
+aux kcond=gkbar*n
+
+@ total=160
+
+@ NTST=2000, NMAX=1000, DSMIN=0.00001, DSMAX=0.005
+done
